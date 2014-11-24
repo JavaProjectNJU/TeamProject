@@ -16,7 +16,7 @@ public class FromYoudao extends WordEngine{
 	}
 	
 	protected Word analyze(String text_HTML){//annalyze the word from html text
-		System.out.print(text_HTML);
+		//System.out.print(text_HTML);
 		if(text_HTML == null || text_HTML.length() == 0)
 			return null;//text error 
 		String wo = null;

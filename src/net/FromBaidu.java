@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import word.Word;
 
@@ -16,13 +18,23 @@ public class FromBaidu extends WordEngine{
 	}
 	
 	protected Word analyze(String text_HTML){//annalyze the word from html text
-		System.out.print(text_HTML);
+		//System.out.print(text_HTML);
 		if(text_HTML == null || text_HTML.length() == 0)
 			return null;//text error 
 		String wo = null;
 		String pron_EN_UK = null;
 		String pron_EN_US = null;
 		ArrayList<String> explain = new ArrayList<String>();
+		Pattern wordPattern = Pattern.compile("cidianData = \\{()window\\.cidianData = cidianData;");
+		Matcher m = wordPattern.matcher(text_HTML);
+		String wordString = null;
+		if(m.find()){
+			wordString = m.group(0);
+		}else{
+			
+			return null;
+		}
+		System.out.println("jam"+ wordString);
 		
 		
 		Word word = new Word();
@@ -39,5 +51,8 @@ public class FromBaidu extends WordEngine{
 		// TODO Auto-generated method stub
 		return new URL(url_prefix + word);
 	}
-
+	public static void main(String[] args){
+		WordEngine baidu = new FromBaidu();
+		baidu.search("test");
+	}
 }
