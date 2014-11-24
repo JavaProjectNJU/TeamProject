@@ -38,4 +38,24 @@ public class User {
 		}
 		return change;
 	}
+	
+	@SuppressWarnings("finally")
+	public boolean identityVerify(String account,String Pw){
+		try {
+			Statement statement = DataBase.connect().createStatement();
+			String sql = "select username,password from user;";
+			ResultSet result = statement.executeQuery(sql);
+			while(result.next()){
+				if(account.equals(result.getString("username"))
+						&&Pw.equals(result.getString("password"))){
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally{
+			return false;
+		}
+	}
 }
