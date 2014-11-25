@@ -37,7 +37,7 @@ public class FromBing extends WordEngine{
 	@Override
 	protected URL getURL(String word) throws MalformedURLException{
 		// TODO Auto-generated method stub
-		return new URL(url_prefix + word);
+		return new URL(url_prefix + word.replaceAll(" ", "%20"));
 	}
 	
 }

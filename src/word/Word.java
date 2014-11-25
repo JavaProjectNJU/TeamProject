@@ -7,7 +7,12 @@ public class Word {
 	private String pron_EN_UK;//is a url for an mp3 file
 	private String pron_EN_US;
 	private ArrayList<String> explain;//explains, the length is the counter
-	
+	public Word(){
+		word = null;
+		pron_EN_UK = null;
+		pron_EN_US = null;
+		explain = null;
+	}
 	public String getWord() {
 		return word;
 	}

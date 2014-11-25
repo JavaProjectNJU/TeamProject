@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,38 +22,60 @@ public class FromBaidu extends WordEngine{
 		//System.out.print(text_HTML);
 		if(text_HTML == null || text_HTML.length() == 0)
 			return null;//text error 
-		String wo = null;
-		String pron_EN_UK = null;
-		String pron_EN_US = null;
-		ArrayList<String> explain = new ArrayList<String>();
-		Pattern wordPattern = Pattern.compile("(?<=cidianData = \\{)[\u0000-\uFFFF]*(?= \\+ netExplain \\+ zhExplain(\\s*)\\};(\\s*)window\\.cidianData = cidianData;)");
+		//String wo = null;
+		//String pron_EN_UK = null;
+		//String pron_EN_US = null;
+		
+		Pattern wordPattern = Pattern.compile("(?<=cidianData = \\{\\s{4}word: word,\\s{4}// )[\u0000-\uFFFF]*(?= \\+ netExplain \\+ zhExplain(\\s*)\\};(\\s*)window\\.cidianData = cidianData;)");
 		Matcher m = wordPattern.matcher(text_HTML);
 		String wordString = null;
+		Word theWord = new Word();
 		if(m.find()){
 			wordString = m.group();
+			Pattern word = Pattern.compile("(?<=head: \\{\"word\":\")[\u0000-\uFFFF]*(?=\",\"head\":\\{\"en\":\\{\"punc\":\")");
+			Pattern pron_EN_UK = Pattern.compile("(?<=\"head\":\\{\"en\":\\{\"punc\":\")[^\"]*(?=\",\"mp3\":\")");
+			Pattern pron_EN_US = Pattern.compile("(?<=\\},\"am\":\\{\"punc\":\")[^\"]*(?=\",\"mp3\":\")");
+			Pattern explains = Pattern.compile("(?<=phonetic: phonetic,\\s{4}explain: \")[\u0000-\uFFFF]*(?=\")");
+			m = word.matcher(wordString);
+			if(m.find())
+				theWord.setWord(m.group());
+			System.out.println(theWord.getWord());
+			m = pron_EN_UK.matcher(wordString);
+			if(m.find())
+				theWord.setPron_EN_UK(m.group());
+			System.out.println(theWord.getPron_EN_UK());
+			m = pron_EN_US.matcher(wordString);
+			if(m.find())
+				theWord.setPron_EN_US(m.group());
+			System.out.println(theWord.getPron_EN_US());
+			m = explains.matcher(wordString);
+			if(m.find()){
+			//	System.out.println(m.group());
+				String[] ex = m.group().split("<br />");
+				ArrayList<String> explain = new ArrayList<String>();
+				for(String str:ex){
+					System.out.println(str);
+					explain.add(str);
+				}
+				theWord.setExplain(explain);
+			}
 		}else{
 			
 			return null;
 		}
-		System.out.println("find"+ wordString);
+		//System.out.println( wordString);
+	
 		
-		
-		Word word = new Word();
-		word.setWord(wo);
-		word.setPron_EN_US(pron_EN_US);
-		word.setPron_EN_UK(pron_EN_UK);
-		word.setExplain(explain);
-		
-		return word;
+		return theWord;
 	}
 
 	@Override
 	protected URL getURL(String word) throws MalformedURLException {
 		// TODO Auto-generated method stub
-		return new URL(url_prefix + word);
+		return new URL(url_prefix + word.replaceAll(" ", "%20"));//霸传进来的字符串转化为合法的URL码
 	}
 	public static void main(String[] args){
 		WordEngine baidu = new FromBaidu();
-		baidu.search("test");
+		baidu.search("give up");
 	}
 }
