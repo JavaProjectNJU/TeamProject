@@ -25,16 +25,16 @@ public class FromBaidu extends WordEngine{
 		String pron_EN_UK = null;
 		String pron_EN_US = null;
 		ArrayList<String> explain = new ArrayList<String>();
-		Pattern wordPattern = Pattern.compile("cidianData = \\{()window\\.cidianData = cidianData;");
+		Pattern wordPattern = Pattern.compile("(?<=cidianData = \\{)[\u0000-\uFFFF]*(?= \\+ netExplain \\+ zhExplain(\\s*)\\};(\\s*)window\\.cidianData = cidianData;)");
 		Matcher m = wordPattern.matcher(text_HTML);
 		String wordString = null;
 		if(m.find()){
-			wordString = m.group(0);
+			wordString = m.group();
 		}else{
 			
 			return null;
 		}
-		System.out.println("jam"+ wordString);
+		System.out.println("find"+ wordString);
 		
 		
 		Word word = new Word();
