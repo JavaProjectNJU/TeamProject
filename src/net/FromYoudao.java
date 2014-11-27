@@ -32,10 +32,10 @@ public class FromYoudao extends WordEngine{
 		if(m.find()){
 			wordString = m.group();
 			System.out.println(wordString);
-			Pattern word = Pattern.compile("(?<=<span class=\"keyword\">)[\u0000-\uFFFF]*(?=</span>\\s*<div class=\"baav\">)");//word must has word letters or space or ' 
-			Pattern pron_EN_UK = Pattern.compile("(?<=\"head\":\\{\"en\":\\{\"punc\":\")[^\"]*(?=\",\"mp3\":\")");
-			Pattern pron_EN_US = Pattern.compile("(?<=\\},\"am\":\\{\"punc\":\")[^\"]*(?=\",\"mp3\":\")");
-			Pattern explains = Pattern.compile("(?<=phonetic: phonetic,\\s{4}explain: \")[\u0000-\uFFFF]*(?=\")");
+			Pattern word = Pattern.compile("(?<=<span class=\"keyword\">)[^<]*(?=</span>)"); 
+			Pattern pron_EN_UK = Pattern.compile("(?<= <span class=\"pronounce\">英\\s{37}<span class=\"phonetic\">)[^<]*(?=</span>)");
+			Pattern pron_EN_US = Pattern.compile("(?<= <span class=\"pronounce\">美\\s{37}<span class=\"phonetic\">)[^<]*(?=</span>)");
+			Pattern explains = Pattern.compile("(?<=<ul>)[\u0000-\uFFFF]*(?=</ul>)");
 			m = word.matcher(wordString);
 			if(m.find())
 				theWord.setWord(m.group());
@@ -51,11 +51,15 @@ public class FromYoudao extends WordEngine{
 			m = explains.matcher(wordString);
 			if(m.find()){
 			//	System.out.println(m.group());
-				String[] ex = m.group().split("<br />");
+				String ex = m.group();
+				Pattern pex = Pattern.compile("(?<=<li>)[^<]*(?=</li>)");
+				Matcher mathcer = pex.matcher(ex);
 				ArrayList<String> explain = new ArrayList<String>();
-				for(String str:ex){
-					System.out.println(str);
-					explain.add(str);
+				int index = 0;
+				while(mathcer.find(index)){
+					
+					System.out.println(mathcer.group(index));
+					explain.add(mathcer.group(index++));
 				}
 				theWord.setExplain(explain);
 			}
@@ -76,7 +80,7 @@ public class FromYoudao extends WordEngine{
 	}
 	public static void main(String[] args){
 		WordEngine youdao = new FromYoudao();
-		youdao.search("D.a");
+		youdao.search("give");
 	}
 
 }

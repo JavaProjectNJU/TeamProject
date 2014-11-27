@@ -55,7 +55,8 @@ public class FromBaidu extends WordEngine{
 				ArrayList<String> explain = new ArrayList<String>();
 				for(String str:ex){
 					System.out.println(str);
-					explain.add(str);
+					if(str != null && str.length() != 0)
+						explain.add(str);
 				}
 				theWord.setExplain(explain);
 			}
@@ -76,6 +77,6 @@ public class FromBaidu extends WordEngine{
 	}
 	public static void main(String[] args){
 		WordEngine baidu = new FromBaidu();
-		baidu.search("give up");
+		baidu.search("give");
 	}
 }
