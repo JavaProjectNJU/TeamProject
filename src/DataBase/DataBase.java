@@ -19,10 +19,12 @@ public class DataBase {
     private static String password = "zhangruiyi";
     //连接句柄
     public static Connection conn = null;
+    private static DataBaseConnectionPool dBPool = new DataBaseConnectionPool("Local", driver, url,
+    		user, password, 1000);
     
     //建立连接
     public static Connection connect(){
-        try{
+        /*try{
             Class.forName(driver);
         }catch(ClassNotFoundException e){
             e.printStackTrace();
@@ -35,11 +37,20 @@ public class DataBase {
             }   
         }catch(SQLException e){
             e.printStackTrace();
-        }
+        }*/
+    	conn = dBPool.getConnection();
+    	try {
+			if(!conn.isClosed()){
+			    System.out.println("成功连接数据库！");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
         return conn;
     }
-    public static void close(){
-        try {
+    public static void close(Connection currentConn){
+      /*  try {
 	    conn.close();
 	} catch (SQLException e) {
             e.printStackTrace();
@@ -52,6 +63,7 @@ public class DataBase {
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}
+	}*/
+    	dBPool.freeConnection(currentConn);
 	}
 }
