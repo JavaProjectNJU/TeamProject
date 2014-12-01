@@ -33,8 +33,8 @@ public class FromYoudao extends WordEngine{
 			wordString = m.group();
 			System.out.println(wordString);
 			Pattern word = Pattern.compile("(?<=<span class=\"keyword\">)[^<]*(?=</span>)"); 
-			Pattern pron_EN_UK = Pattern.compile("(?<= <span class=\"pronounce\">英\\s{37}<span class=\"phonetic\">)[^<]*(?=</span>)");
-			Pattern pron_EN_US = Pattern.compile("(?<= <span class=\"pronounce\">美\\s{37}<span class=\"phonetic\">)[^<]*(?=</span>)");
+			Pattern pron_EN_UK = Pattern.compile("(?<= <span class=\"pronounce\">英\\\s{37}<span class=\"phonetic\">)[^<]*(?=</span>)");
+			Pattern pron_EN_US = Pattern.compile("(?<= <span class=\"pronounce\">美\\\s{37}<span class=\"phonetic\">)[^<]*(?=</span>)");
 			Pattern explains = Pattern.compile("(?<=<ul>)[\u0000-\uFFFF]*(?=</ul>)");
 			m = word.matcher(wordString);
 			if(m.find())
