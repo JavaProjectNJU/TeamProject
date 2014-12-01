@@ -70,7 +70,7 @@ public class DataBaseConnectionPool
 		{
 			con = newConnection(); //新建连接
 		}
-		if(this.maxConn == 0 ||this.maxConn < this.inUsed)
+		if(this.maxConn == 0 || this.maxConn < this.inUsed)
 		{
 			con = null;//达到最大连接数，暂时不能获得连接了。
 		}

@@ -1,7 +1,6 @@
 package DataBase;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DataBase {
@@ -66,4 +65,7 @@ public class DataBase {
 	}*/
     	dBPool.freeConnection(currentConn);
 	}
+    public static void closeAll(){
+    	dBPool.release();
+    }
 }
