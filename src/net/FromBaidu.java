@@ -73,7 +73,7 @@ public class FromBaidu extends WordEngine{
 	@Override
 	protected URL getURL(String word) throws MalformedURLException {
 		// TODO Auto-generated method stub
-		return new URL(url_prefix + word.replaceAll(" ", "%20"));//霸传进来的字符串转化为合法的URL码
+		return new URL(url_prefix + word.replaceAll(" ", "%20"));//闇镐紶杩涙潵鐨勫瓧绗︿覆杞寲涓哄悎娉曠殑URL鐮�
 	}
 	public static void main(String[] args){
 		WordEngine baidu = new FromBaidu();

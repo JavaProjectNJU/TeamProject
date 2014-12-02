@@ -39,15 +39,7 @@ public class DictionaryManager {
 	public boolean AddWord(String Word,String[] meaning,int type) 
 	{
 		boolean change = false;
-		try {
-			Statement statement = DataBase.connect().createStatement();
-			String sql = "insert into USERTABLE(username,password) values('"
-					+account+"','"+Pw+"');";
-			statement.execute(sql);
-			change = true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return change;
 	}
 	public boolean AddPraise(String Word)
