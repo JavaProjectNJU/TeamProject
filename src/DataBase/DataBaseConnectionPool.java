@@ -27,15 +27,7 @@ public class DataBaseConnectionPool
 	public DataBaseConnectionPool() {
 		// TODO Auto-generated constructor stub
 	}
-/**
-* 创建连接池
-* @param driver
-* @param name
-* @param URL
-* @param user
-* @param password
-* @param maxConn
-*/
+
 	public DataBaseConnectionPool(String name, String driver,String URL, String user, String password, int maxConn)
 	{
 		this.name = name;
@@ -89,7 +81,7 @@ public class DataBaseConnectionPool
 		}
 		else
 		{
-			con=newConnection(); //新建连接
+			con = newConnection(); //新建连接
 		}
 		if(this.maxConn == 0 || this.maxConn<this.inUsed)
 		{

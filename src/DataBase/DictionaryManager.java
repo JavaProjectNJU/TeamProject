@@ -10,7 +10,7 @@ import java.sql.Statement;
 //Type 3:Youdao
 
 public class DictionaryManager {
-	public boolean SetMeaning(String word,String[] meaning,int type)
+	public static boolean SetMeaning(String word,String[] meaning,int type)
 	{
 		boolean change = false;
 		try {
@@ -25,25 +25,43 @@ public class DictionaryManager {
 			if(existence == false)
 				return false;
 			if(type == 1)
-				statement.execute("update user set Baidu = '"+ meaning.toString() +"' where Word = '"+word+"';");
+				statement.execute("update Dictionary set Baidu = '"+ meaning.toString() +"' where Word = '"+word+"';");
 			else if(type == 2)
-				statement.execute("update user set Bing = '"+ meaning.toString() +"' where Word = '"+word+"';");
+				statement.execute("update Dictionary set Bing = '"+ meaning.toString() +"' where Word = '"+word+"';");
 			else
-				statement.execute("update user set Youdao = '"+ meaning.toString() +"' where Word = '"+word+"';");
+				statement.execute("update Dictionary set Youdao = '"+ meaning.toString() +"' where Word = '"+word+"';");
 			change = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return change;
 	}
-	public boolean AddWord(String Word,String[] meaning,int type) 
+	public static boolean AddWord(String word,String[] meaning, int type) 
 	{
 		boolean change = false;
-		
+		try {
+			Statement statement = DataBase.connect().createStatement();
+			String sql = "insert into Dictionary(Word) values('"
+					+ word+"');";
+			statement.execute(sql);
+			change = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return change;
 	}
-	public boolean AddPraise(String Word)
+	public static boolean AddPraise(String word)
 	{
-		return true;
+		boolean change = false;
+		try {
+			Statement statement = DataBase.connect().createStatement();
+			String sql = "insert into Dictionary(Word,Baidu,Bing,Youdao) values('"
+					+ word +"null,null,null";
+			statement.execute(sql);
+			change = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return change;
 	}
 }
