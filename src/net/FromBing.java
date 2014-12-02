@@ -77,6 +77,6 @@ public class FromBing extends WordEngine{
 	}
 	public static void main(String[] args){
 		WordEngine bing = new FromBing();
-		bing.search("dictionary");
+		bing.search("gggg");
 	}
 }
