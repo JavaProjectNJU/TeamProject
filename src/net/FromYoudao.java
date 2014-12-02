@@ -25,16 +25,16 @@ public class FromYoudao extends WordEngine{
 		//String pron_EN_UK = null;
 		//String pron_EN_US = null;
 				
-		Pattern wordPattern = Pattern.compile("(?<=<div id=\"phrsListTab\" class=\"trans-wrapper clearfix\">\\s{29}<h2 class=\"wordbook-js\">)[\u0000-\uFFFF]*(?=</div>\\s*</div>\\s*<div id=\"webTrans\" class=\"trans-wrapper trans-tab\">)");
+		Pattern wordPattern = Pattern.compile("(?<=<div id=\"phrsListTab\" class=\"trans-wrapper clearfix\">)[\u0000-\uFFFF]*(?=</div>\\s*</div>\\s*<div id=\"webTrans\" class=\"trans-wrapper trans-tab\">)");
 		Matcher m = wordPattern.matcher(text_HTML);
 		String wordString = null;
 		Word theWord = new Word();
 		if(m.find()){
 			wordString = m.group();
-			System.out.println(wordString);
+			//System.out.println(wordString);
 			Pattern word = Pattern.compile("(?<=<span class=\"keyword\">)[^<]*(?=</span>)"); 
-			Pattern pron_EN_UK = Pattern.compile("(?<= <span class=\"pronounce\">英\\\s{37}<span class=\"phonetic\">)[^<]*(?=</span>)");
-			Pattern pron_EN_US = Pattern.compile("(?<= <span class=\"pronounce\">美\\\s{37}<span class=\"phonetic\">)[^<]*(?=</span>)");
+			Pattern pron_EN_UK = Pattern.compile("(?<=<span class=\"pronounce\">英\\s{37}<span class=\"phonetic\">)[^<]*(?=</span>)");
+			Pattern pron_EN_US = Pattern.compile("(?<=<span class=\"pronounce\">美\\s{37}<span class=\"phonetic\">)[^<]*(?=</span>)");
 			Pattern explains = Pattern.compile("(?<=<ul>)[\u0000-\uFFFF]*(?=</ul>)");
 			m = word.matcher(wordString);
 			if(m.find())
@@ -55,11 +55,10 @@ public class FromYoudao extends WordEngine{
 				Pattern pex = Pattern.compile("(?<=<li>)[^<]*(?=</li>)");
 				Matcher mathcer = pex.matcher(ex);
 				ArrayList<String> explain = new ArrayList<String>();
-				int index = 0;
-				while(mathcer.find(index)){
+				while(mathcer.find()){
 					
-					System.out.println(mathcer.group(index));
-					explain.add(mathcer.group(index++));
+					System.out.println(mathcer.group());
+					explain.add(mathcer.group());
 				}
 				theWord.setExplain(explain);
 			}
