@@ -9,10 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Timer;
-/*
-* @author chenyanlin
-*
-*/
+
 public class DataBaseConnectionPool
 {
 	private Connection con = null;
