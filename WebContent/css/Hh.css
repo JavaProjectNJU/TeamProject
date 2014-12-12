@@ -1,7 +1,9 @@
 /*-------------------------------------
 General
 --------------------------------------*/
-.body { margin-bottom: 30px; }
+.body {
+	margin-bottom: 30px;
+}
 
 h1 {
 	font-weight: 300;
@@ -26,29 +28,49 @@ h2 {
 Login
 --------------------------------------*/
 .Hh-header {
-  background-color: #0B8290;
-  color: white;
-  min-height: 90px;
+	background-color: #0B8290;
+	color: white;
+	min-height: 90px;
 }
-.Hh-header .col {	line-height: 20px; }
+
+.Hh-header .col {
+	line-height: 20px;
+}
+
 .Hh-header .checkbox {
-  display: block;
-  margin-top: 5px;
+	display: block;
+	margin-top: 5px;
 }
-.Hh-header form { margin-top: 25px; }
-.Hh-header .form-inline .form-group { vertical-align: top; }
 
-.form-group { margin-bottom: 20px; }
-.form-group a {	line-height: 34px; }
-.fa { font-size: 16px; }
+.Hh-header form {
+	margin-top: 25px;
+}
 
-.logo { margin: 18px; }
+.Hh-header .form-inline .form-group {
+	vertical-align: top;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+.form-group a {
+	line-height: 34px;
+}
+
+.fa {
+	font-size: 16px;
+}
+
+.logo {
+	margin: 18px;
+}
 
 /*-------------------------------------
 Signin
 --------------------------------------*/
 .Hh-container {
-	background-color: rgba(255,255,255,0.8);
+	background-color: rgba(255, 255, 255, 0.8);
 	border: 1px solid #dedede;
 	border-radius: 8px;
 	margin: 0 auto;
@@ -58,23 +80,36 @@ Signin
 .Hh-sign-in {
 	background-color: #fff;
 	border: none;
-	max-width: 700px;	
+	max-width: 700px;
 }
 
-.Hh-bg-gray { background-color: #eee; }
-.Hh-bg-gray h1 { color: rgb(74, 164, 180); }
+.Hh-bg-gray {
+	background-color: #eee;
+}
 
-.margin-bottom-15 {	margin-bottom: 15px; }
+.Hh-bg-gray h1 {
+	color: rgb(74, 164, 180);
+}
+
+.margin-bottom-15 {
+	margin-bottom: 15px;
+}
 
 .Hh-sign-in .col-md-6, .Hh-sign-in .col-md-12 {
 	padding-top: 5px;
 	padding-bottom: 15px;
 }
 
-.Hh-sign-in label { font-weight: 400; }
+.Hh-sign-in label {
+	font-weight: 400;
+}
+
 .Hh-sign-in input[type='checkbox'] {
 	margin-right: 10px;
 	position: relative;
 	top: -1.5px;
 }
-.Hh-radio-group { margin-top: 30px; }
+
+.Hh-radio-group {
+	margin-top: 30px;
+}
