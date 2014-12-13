@@ -6,8 +6,8 @@ public class User {
 	private String account;
 	private String pw;
 	private ArrayList<User> onlineFriend;
-	User(){}
-	User(String account,String Pw)
+	public User(){}
+	public User(String account,String Pw)
 	{
 		this.account = account;
 		this.pw = Pw;

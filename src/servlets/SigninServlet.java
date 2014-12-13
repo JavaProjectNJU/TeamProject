@@ -27,6 +27,7 @@ public class SigninServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		doSignin(request, response);
 	}
 
 	/**
@@ -34,6 +35,17 @@ public class SigninServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		doSignin(request, response);
 	}
 
+	
+	protected void doSignin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String firstName = (String)request.getParameter("firstname");
+		String lastName = (String)request.getParameter("lastname");
+		String eMail = (String)request.getParameter("email");
+		String uid = (String)request.getParameter("username");
+		String psw = (String)request.getParameter("password");
+		String sex = (String)request.getParameter("sex");
+		
+	}
 }

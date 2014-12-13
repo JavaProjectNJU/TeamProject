@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import DataBase.User;
 /**
  * Servlet implementation class LoginServlet
  */
@@ -41,15 +41,14 @@ public class LoginServlet extends HttpServlet {
 	protected void doLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uid = (String)request.getParameter("uid");
 		String psw = (String)request.getParameter("password");
-		boolean login = login(uid, psw);
-		if(login)
-			response.sendRedirect("");// direct to login
-		else
-			response.sendRedirect("");// direct to password error or no user
-	}
-	
-	protected boolean login(String uid, String psw){
+		User usr = new User(uid, psw);
 		
-		return false;
+		boolean login = usr.login();
+		if(login){
+			response.sendRedirect("");// direct to login
+			//list of frinend
+		} else{
+			response.sendRedirect("");// direct to password error or no user
+		}
 	}
 }
